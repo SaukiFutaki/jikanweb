@@ -13,8 +13,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Fira_Code } from "next/font/google";
 const fira_code = Fira_Code({
-  variable: "--font-fira-code",
-  weight: "400",
+ subsets: ["latin"],
+ weight: ["400"],
 });
 
 const RevealNavbar = () => {
