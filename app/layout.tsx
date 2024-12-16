@@ -1,3 +1,4 @@
+import RevealNavbar from "@/components/fg/navbar/reveal";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -28,7 +29,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+       
+        <div className="mb-32">
+          <RevealNavbar />
+        </div>
+        <div className="">{children}</div>
       </body>
     </html>
   );
