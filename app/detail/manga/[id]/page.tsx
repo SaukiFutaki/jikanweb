@@ -1,4 +1,4 @@
-import { getMangaById } from "@/lib/actions/manga";
+import { getMangaById, getMangaRecommendation } from "@/lib/actions/manga";
 import React from "react";
 import CardDetail from "../../_components/card-detail";
 
@@ -9,10 +9,12 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { id } = await params;
   const data = await getMangaById(id);
-  console.log(data);
+  const dataRecommendation = await getMangaRecommendation(id);
+  console.log(dataRecommendation);
+ 
   return (
     <div className="min-h-screen bg-background">
-      <CardDetail data={data.data} />
+      <CardDetail data={data.data} dataRecommendation={dataRecommendation?.data} />
     </div>
   );
 }

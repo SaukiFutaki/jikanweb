@@ -14,3 +14,10 @@ export const getMangaById = async (id: string) => {
 
     return data
 }
+
+export const getMangaRecommendation = async (id: string) => {
+    const response = await fetch(`${process.env.MANGA_URL}/${id}/recommendations`)
+    const data = await response.json()
+
+    return data
+}

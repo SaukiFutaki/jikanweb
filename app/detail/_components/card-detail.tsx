@@ -1,16 +1,17 @@
+import { Rating } from "@/components/rating";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { formattedScoreBy } from "@/lib/helper/formats";
-import { IDataManga } from "@/types/detail/manga";
-import { BookOpen, Heart, Share2, Star } from "lucide-react";
+import { formatNumberRating, formatScoreBy } from "@/lib/helper/formats";
+import { IDataManga, IDataRecommendationManga } from "@/types/detail/manga";
+import { BookOpen, Heart, Share2 } from "lucide-react";
 import Image from "next/image";
 
 
 
-export default function CardDetail({ data }: { data: IDataManga }) {
+export default function CardDetail({ data,dataRecommendation }: { data: IDataManga,dataRecommendation: IDataRecommendationManga[] }) {
        
 
   return (
@@ -21,8 +22,7 @@ export default function CardDetail({ data }: { data: IDataManga }) {
           <Image
             src={data.images.webp.large_image_url}
             alt="Manga Cover"
-            width={1200}
-            height={600}
+            fill
             className="h-full w-full object-cover brightness-50"
           />
         </div>
@@ -36,7 +36,7 @@ export default function CardDetail({ data }: { data: IDataManga }) {
               className="rounded-lg border-4 border-background shadow-xl"
             />
             <div className="flex-1 space-y-4">
-              <h1 className="text-4xl font-bold text-white">{data.title}</h1>
+              <h1 className="text-4xl font-bold text-white">{data.title} / {data.title_japanese}</h1>
               <div className="flex gap-2">
                 {data.genres.map((genre) => (
                   <Badge key={genre.name}>{genre.name}</Badge>
@@ -76,17 +76,10 @@ export default function CardDetail({ data }: { data: IDataManga }) {
                 <div className="flex items-center justify-between">
                   <div className="space-y-1">
                     <div className="flex items-center">
-                      <Star className="h-5 w-5 fill-primary text-primary" />
-                      <Star className="h-5 w-5 fill-primary text-primary" />
-                      <Star className="h-5 w-5 fill-primary text-primary" />
-                      <Star className="h-5 w-5 fill-primary text-primary" />
-                      <Star className="h-5 w-5 text-muted-foreground" />
-                      <span className="ml-2 text-sm text-muted-foreground">
-                        4.0 / 5.0
-                      </span>
+                        <Rating rating={data.score} />
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Based on {formattedScoreBy(data.scored_by)} ratings
+                      Based on {formatScoreBy(data.scored_by)} ratings
                     </p>
                   </div>
                   <div className="grid grid-cols-2 gap-4 text-center">
@@ -99,7 +92,9 @@ export default function CardDetail({ data }: { data: IDataManga }) {
                       </div>
                     </div>
                     <div>
-                      <div className="text-2xl font-bold">45.6K</div>
+                      <div className="text-2xl font-bold">
+                       {formatNumberRating(data.members)}
+                      </div>
                       <div className="text-sm text-muted-foreground">
                         Readers
                       </div>
@@ -119,21 +114,23 @@ export default function CardDetail({ data }: { data: IDataManga }) {
 
             {/* Related Manga */}
             <div className="space-y-4">
-              <h2 className="text-xl font-bold">You May Also Like</h2>
+              <h2 className="text-xl font-bold">
+                Recommended Manga by the same genre
+              </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                {Array.from({ length: 6 }).map((_, i) => (
-                  <Card key={i} className="overflow-hidden">
-                    <Image
-                      src="/placeholder.svg?height=240&width=160"
-                      alt="Related Manga"
-                      width={160}
-                      height={240}
-                      className="w-full object-cover aspect-[2/3]"
-                    />
-                    <CardContent className="p-2">
-                      <p className="font-medium truncate">
-                        Manga Title {i + 1}
-                      </p>
+                {dataRecommendation.map((manga) => (
+                  <Card key={manga.entry.mal_id}>
+                    <CardContent className="p-4">
+                      <div className="flex flex-col items-center">
+                        <Image
+                          src={manga.entry.images.webp.large_image_url}
+                          alt={manga.entry.title}
+                          width={200}
+                          height={300}
+                          className="w-full object-cover aspect-square"
+                        />
+                        <h3 className="text-sm font-medium mt-2">{manga.entry.title}</h3>
+                      </div>
                     </CardContent>
                   </Card>
                 ))}

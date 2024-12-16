@@ -1,7 +1,9 @@
-import RevealNavbar from "@/components/fg/navbar/reveal";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Link from "next/link";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
+import { Pixelify_Sans } from "next/font/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,6 +15,11 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+
+const pixelify = Pixelify_Sans({
+  subsets: ["latin"],
+  weight: ["400"],
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,10 +36,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       
-        <div className="mb-32">
-          <RevealNavbar />
-        </div>
+        <NextTopLoader />
+
+        <header className="border-b-4 border-black flex justify-between p-6 items-center bg-white">
+          <Link href="/">
+            <p className={`${pixelify.className} md:text-5xl text-black`}>Anime</p>
+          </Link>
+        </header>
+
         <div className="">{children}</div>
       </body>
     </html>
