@@ -6,7 +6,7 @@ interface Props {
   className?: string;
 }
 
-const BrutalCard: React.FC<Props> = ({ color, children,className }) => {
+const BrutalCard = ({ color, children,className } : Props) => {
   const randomColor =
     color ?? colors[Math.floor(Math.random() * colors.length)];
 

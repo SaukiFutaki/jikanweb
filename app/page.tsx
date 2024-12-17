@@ -30,7 +30,7 @@ export default async function Home() {
             <p className="mt-2 outfit  text-xl md:text-3xl lg:text-5xl"></p>
             <BrutalButton
               link="https://github.com/SaukiFutaki"
-              className="flex items-center justify-center "
+              className="flex items-center justify-center"
             >
               Kunjungi Github saya →
             </BrutalButton>

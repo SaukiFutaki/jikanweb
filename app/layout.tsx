@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import { Pixelify_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import Link from "next/link";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
-import { Pixelify_Sans } from "next/font/google";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,8 +38,8 @@ export default function RootLayout({
       >
         <NextTopLoader />
 
-        <header className="border-b-4 border-black flex justify-between p-6 items-center bg-white selection:bg-red-500https://github.com/SaukiFutaki">
-          <Link href="/">
+        <header className="border-b-4 border-black flex justify-between p-6 items-center bg-white">
+          <Link href="/" className=" selection:bg-red-500">
             <p className={`${pixelify.className} md:text-5xl text-black`}>Anime</p>
           </Link>
         </header>

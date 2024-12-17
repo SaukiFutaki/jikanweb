@@ -45,7 +45,7 @@ export default function PSliderTopManga({data} : {data : IProps[]}) {
               className='text-left  p-3 sm:border-b border sm:pl-5 sm:pb-0 pb-6 sm:flex-1'
               progressBarClass='left-0 sm:top-0 bottom-0 dark:bg-white bg-black sm:w-3 sm:h-full h-4  before:h-full before:w-4 before:'
             >
-              <h2 className='relative px-4 rounded w-fit dark:bg-blue-500 bg-black text-white mb-2'>
+              <h2 className='relative px-4 rounded w-fit dark:bg-blue-500 bg-black text-white mb-2 line-clamp-1 '>
                 {item.title}
               </h2>
               <p className='text-sm font-medium dark:text-slate-200 text-slate-900 line-clamp-2'>

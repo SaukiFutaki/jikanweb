@@ -3,22 +3,23 @@
 import Link from "next/link";
 import React from "react";
 
-interface Props extends React.HTMLAttributes<HTMLAnchorElement> {
+interface Props {
   color?: string;
 
   children?: React.ReactNode;
   link?: string;
+  className?: string;
 }
 
 const colors = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEEAD"];
 
-const BrutalButton: React.FC<Props> = ({ link, color, children }) => {
+const BrutalButton = ({ link, color, children,className } : Props ) => {
   const randomColor =
     color ?? colors[Math.floor(Math.random() * colors.length)];
 
   return (
     <Link href={`${link}`}>
-      <div className="brutal-btn" style={{ backgroundColor: randomColor }}>
+      <div className={`${className} brutal-btn`} style={{ backgroundColor: randomColor }}>
         {children} 
       </div>
     </Link>
