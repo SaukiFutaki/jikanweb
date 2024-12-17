@@ -32,7 +32,9 @@ export default async function Home() {
               link="https://github.com/SaukiFutaki"
               className="flex items-center justify-center"
             >
-              Kunjungi Github saya →
+             <h1 className=" text-black ">
+             Kunjungi Github saya →
+             </h1>
             </BrutalButton>
           </div>
         </BrutalCard>
@@ -41,9 +43,9 @@ export default async function Home() {
           <BrutalButton>
 
           </BrutalButton>
-          <BrutalButton link="anime">Temukan Anime → </BrutalButton>
+          <BrutalButton link="anime" className="text-black">Temukan Anime → </BrutalButton>
 
-          <BrutalButton link="manga">Temukan Manga →</BrutalButton>
+          <BrutalButton link="manga" className="text-black">Temukan Manga →</BrutalButton>
         </div>
       </div>
 

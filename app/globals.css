@@ -85,6 +85,10 @@ body {
   background-color: var(--color);
 }
 
+.brutal-btn.bg-random {
+  background-color: var(--color);
+}
+
 .brutal-card{
   background-color: var(--color);
     border-radius: 0.5rem;
