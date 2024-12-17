@@ -8,6 +8,7 @@ import {
 } from '@/components/uilayouts/progress-slider';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // import { imgPreview } from '@/components/website/constant';
 
@@ -61,6 +62,7 @@ export default function PSliderTopManga({data} : {data : IProps[]}) {
               key={index}
               value={item?.title}
             >
+              <Link href={`/detail/manga/${item.mal_id}`}>
               <Image
                 className=' h-[500px] object-cover  border-black border-2'
                 src={item.images.webp.large_image_url}
@@ -68,6 +70,7 @@ export default function PSliderTopManga({data} : {data : IProps[]}) {
                 height={1080}
                 alt={item.images.webp.large_image_url}
               />
+              </Link>
             </SliderWrapper>
           ))}
         </SliderContent>

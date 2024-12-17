@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import type { Metadata } from "next";
 import { Pixelify_Sans } from "next/font/google";
 import localFont from "next/font/local";
@@ -19,7 +20,7 @@ const geistMono = localFont({
 const pixelify = Pixelify_Sans({
   subsets: ["latin"],
   weight: ["400"],
-})
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -36,15 +37,28 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextTopLoader />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextTopLoader />
 
-        <header className="border-b-4 border-black flex justify-between p-6 items-center bg-white">
-          <Link href="/" className=" selection:bg-red-500">
-            <p className={`${pixelify.className} md:text-5xl text-black`}>Anime</p>
-          </Link>
-        </header>
+          <header className="border-b-4 border-black flex justify-between  items-center bg-white">
+            <Link
+              href="/"
+              className=" selection:bg-red-500 border-r-4 border-black p-6"
+            >
+              <p className={`${pixelify.className} md:text-5xl text-black`}>
+                Anime
+              </p>
+            </Link>
+          
+          </header>
 
-        <div className="">{children}</div>
+          <div className="">{children}</div>
+        </ThemeProvider>
       </body>
     </html>
   );

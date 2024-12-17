@@ -1,4 +1,5 @@
 "use client";
+import { Sanchez } from "next/font/google";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -11,7 +12,10 @@ interface Props {
 }
 
 const colors = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEEAD"];
-
+const sanchez = Sanchez({
+  subsets: ["latin"],
+  weight: ["400"],
+})
 const BrutalButton = ({
   link,
   color,
@@ -30,17 +34,21 @@ const BrutalButton = ({
   return (
     <>
       {disabled ? (
-        <div
-          className={`${className} brutal-btn ${
-            isHovered || isPressed ? "bg-random" : "bg-white"
-          }`}
-          style={isHovered || isPressed ? { backgroundColor: randomColor } : {}}
-          onMouseEnter={() => setIsHovered(true)} // Event handler untuk hover
-          onMouseLeave={() => setIsHovered(false)} // Event handler untuk hover
-          onMouseDown={() => setIsPressed(true)} // Event handler untuk tombol ditekan
-          onMouseUp={() => setIsPressed(false)} // Event handler untuk tombol dilepas
-        >
-          {children}
+        <div>
+          <div
+            className={`${className} brutal-btn ${sanchez.className} ${
+              isHovered || isPressed ? "bg-random" : "bg-white"
+            }`}
+            style={
+              isHovered || isPressed ? { backgroundColor: randomColor } : {}
+            }
+            onMouseEnter={() => setIsHovered(true)} // Event handler untuk hover
+            onMouseLeave={() => setIsHovered(false)} // Event handler untuk hover
+            onMouseDown={() => setIsPressed(true)} // Event handler untuk tombol ditekan
+            onMouseUp={() => setIsPressed(false)} // Event handler untuk tombol dilepas
+          >
+            {children}
+          </div>
         </div>
       ) : (
         <Link href={`${link}`} className="">

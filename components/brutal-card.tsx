@@ -1,7 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const colors = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#f472b6","#fb923c"]; //
+const colors = [
+  "#FF6B6B",
+  "#4ECDC4",
+  "#45B7D1",
+  "#96CEB4",
+  "#f472b6",
+  "#fb923c",
+]; //
 
 interface Props {
   color?: string;
@@ -17,7 +24,7 @@ const BrutalCard = ({ color, children, className }: Props) => {
   }, [color]);
   return (
     <div
-      className={`brutal-card ${className}`}
+      className={`rounded-[0.5rem] border-black border-[3px] drop-shadow-[7px_7px_0_rgb(0_0_0_/_1)] transition-all duration-500 ease-in-out hover:drop-shadow-[5px_5px_0_rgb(0_0_0_/_1)] p-4 ${className}`}
       style={{ backgroundColor: randomColor }}
     >
       {children}
