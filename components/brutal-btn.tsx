@@ -7,7 +7,7 @@ interface Props extends React.HTMLAttributes<HTMLAnchorElement> {
   color?: string;
 
   children?: React.ReactNode;
-  link: string;
+  link?: string;
 }
 
 const colors = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEEAD"];
@@ -17,9 +17,9 @@ const BrutalButton: React.FC<Props> = ({ link, color, children }) => {
     color ?? colors[Math.floor(Math.random() * colors.length)];
 
   return (
-    <Link href={`/${link}`}>
+    <Link href={`${link}`}>
       <div className="brutal-btn" style={{ backgroundColor: randomColor }}>
-        {children}
+        {children} 
       </div>
     </Link>
   );

@@ -215,7 +215,7 @@ html {
   border-right: none;
 }
 
-::selection
+/* ::selection
 {
   background-color: aliceblue;
-}
+} */

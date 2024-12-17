@@ -38,7 +38,7 @@ export default function RootLayout({
       >
         <NextTopLoader />
 
-        <header className="border-b-4 border-black flex justify-between p-6 items-center bg-white">
+        <header className="border-b-4 border-black flex justify-between p-6 items-center bg-white selection:bg-red-500https://github.com/SaukiFutaki">
           <Link href="/">
             <p className={`${pixelify.className} md:text-5xl text-black`}>Anime</p>
           </Link>
