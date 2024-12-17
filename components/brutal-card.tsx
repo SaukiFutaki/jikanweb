@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const colors = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#f472b6"]; //
+const colors = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#f472b6","#fb923c"]; //
 
 interface Props {
   color?: string;
