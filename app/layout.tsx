@@ -54,10 +54,17 @@ export default function RootLayout({
                 Anime
               </p>
             </Link>
-          
           </header>
 
           <div className="">{children}</div>
+          <footer className="border-t-4 border-black bg-white p-6">
+            <p className="text-black ">
+              © {new Date().getFullYear()}
+              <a className="pl-2 underline hover:text-blue-500" href="https://www.linkedin.com/in/m-sauki-futaki-wahid-b67a7924a/">
+                Sauki Futaki
+              </a>
+            </p>
+          </footer>
         </ThemeProvider>
       </body>
     </html>
