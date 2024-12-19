@@ -1,98 +1,45 @@
 "use client";
 import { IDataAnime } from "@/types/detail/anime";
-import { motion } from "framer-motion";
 import BrutalButton from "../brutal-btn";
 import BrutalCard from "../brutal-card";
-import HeroMangaPopuler from "../hmanga-populer";
-import PSliderTopAnime from "../p-slider-l";
+import HeroAnimePopuler from "../hanime-populer";
+import { Share_Tech_Mono } from "next/font/google";
 
 interface Props {
   data: IDataAnime[];
 }
 
+const shareTechmono = Share_Tech_Mono({
+  subsets : ["latin"],
+  weight : "400"
+})
+
 export default function HeroAnime({ data }: Props) {
-  const cardVariants = {
-    hidden: { opacity: 0, x: 100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-  };
-
-  const buttonVariants = {
-    hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: -50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
-  const sliderVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-
+ 
   return (
     <>
-      <div className="mb-8 card-shadow">
-        {/* title */}
-        <motion.h1
-          className="text-4xl mb-2 inline-block"
-          variants={titleVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          Top Anime
-          <div className="border-b-[3px] mt-1 border-black" />
-        </motion.h1>
+      <div className="mb-8 card-shadow"></div>
 
-        {/* slider */}
-        <motion.div
-          variants={sliderVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <PSliderTopAnime data={data} />
-        </motion.div>
-      </div>
-
-      {/* manga */}
       <div>
-        <motion.div
-          variants={cardVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+        <div>
           <BrutalCard>
-            <div className="flex flex-row justify-between mb-2 items-center">
-              <motion.h1
-                className="text-5xl"
-                variants={buttonVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                Manga Terpopuler
-              </motion.h1>
-              <motion.div
-                variants={buttonVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <BrutalButton className="text-black flex justify-center items-center">
-                  Go to All Manga →
+            <div className="flex flex-row justify-between mb-4 items-center">
+              <h1 className={`${shareTechmono.className} text-5xl`}>Anime Terpopuler</h1>
+              <div>
+                <BrutalButton
+                  link="anime"
+                  className="text-black flex justify-center items-center"
+                >
+                  Go to All Anime →
                 </BrutalButton>
-              </motion.div>
+              </div>
             </div>
 
             <div className="">
-              <HeroMangaPopuler data={data} />
+              <HeroAnimePopuler data={data} />
             </div>
           </BrutalCard>
-        </motion.div>
+        </div>
       </div>
     </>
   );

@@ -14,7 +14,7 @@ function ButtonLogin() {
           </span>
           <ArrowRight />
         </div>
-        <div className='rounded-full absolute top-[40%] left-[20%] h-2 w-2 group-hover:h-full group-hover:w-full  bg-black scale-[1] dark:group-hover:bg-[#e7cb6e] group-hover:bg-[#263381] group-hover:scale-[1.8] transition-all duration-300 group-hover:top-[0%] group-hover:left-[0%] '></div>
+        <div className='rounded-full absolute top-[40%] left-[20%] h-2 w-2 group-hover:h-full group-hover:w-full  bg-black scale-[1] dark:group-hover:bg-[#e7cb6e] group-hover:bg-black group-hover:scale-[1.8] transition-all duration-300 group-hover:top-[0%] group-hover:left-[0%] '></div>
       </div>
     </>
   );

@@ -22,6 +22,9 @@ export interface IDataAnime {
     favorites: number;
     members : number;
     title_japanese: string;
+    trailer :{
+      embed_url : string
+    }
   }
   
   export interface IDataRecommendationManga {

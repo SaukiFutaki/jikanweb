@@ -10,6 +10,7 @@ import PSliderTopManga from "@/components/p-slider-top";
 import { getTopAnimeWithLimit } from "@/lib/actions/anime";
 import { getTopMangaWithLimit } from "@/lib/actions/manga";
 import { Orbitron, Roboto } from "next/font/google";
+import HeroAnime from "@/components/anime/hero";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
@@ -23,7 +24,7 @@ const roboto = Roboto({
 })
 export default async function Home() {
   const data = await getTopMangaWithLimit(3);
-  // const animeData = await getTopAnimeWithLimit(4);
+  const animeData = await getTopAnimeWithLimit(6);
 
   return (
     <div>
@@ -77,7 +78,7 @@ export default async function Home() {
 
 
       <div className="h-full bg-blue-400 p-10 border-black border-2">
-        {/* <HeroAnime data={animeData.data} /> */}
+         <HeroAnime data={animeData.data} />
       </div>
     </div>
   );

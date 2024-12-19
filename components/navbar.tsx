@@ -41,6 +41,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -54,10 +55,13 @@ export default function Navbar() {
     <motion.header
       variants={{
         visible: { y: 0 },
-        hidden: { y: "-100%" },
+        hidden: { y: "-80%" },
+        hover : {y:0}
       }}
-      animate={hidden ? "hidden" : "visible"}
+      animate={isHovered ? "hover" : (hidden ? "hidden" : "visible")}
       transition={{ duration: 0.35, ease: "easeInOut" }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className="border-b-4 border-black flex justify-between  items-center bg-white sticky top-0 z-50"
     >
       <div className=" border-r-4 border-black p-4">

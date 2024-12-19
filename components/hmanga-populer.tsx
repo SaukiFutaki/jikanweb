@@ -14,7 +14,7 @@ export default function HeroMangaPopuler({ data }: { data: IDataManga[] }) {
               loading="lazy"
               width={300}
               height={200}
-              alt="One Piece"
+              alt={item.title}
               src={item.images.webp.large_image_url}
               className="border-black border-2 object-cover aspect-video rounded-lg"
             />
