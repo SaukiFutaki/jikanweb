@@ -41,3 +41,15 @@ export const getRandomAnimeRecommendation = async () => {
   
     return data;
   };
+
+
+  export const searchAnime = async (query: string) => {
+    if (!query) return [];
+    
+    const response = await fetch(`${process.env.BASE_URL}/anime?q=${query}`);
+    const data = await response.json();
+    console.log(data)
+    return data;
+  }
+  
+  

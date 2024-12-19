@@ -3,16 +3,14 @@ import { IDataAnime } from "@/types/detail/anime";
 import BrutalButton from "../brutal-btn";
 import BrutalCard from "../brutal-card";
 import HeroAnimePopuler from "../hanime-populer";
-import { Share_Tech_Mono } from "next/font/google";
+import { shareTechmono } from "@/app/fonts";
+
 
 interface Props {
   data: IDataAnime[];
 }
 
-const shareTechmono = Share_Tech_Mono({
-  subsets : ["latin"],
-  weight : "400"
-})
+
 
 export default function HeroAnime({ data }: Props) {
  
