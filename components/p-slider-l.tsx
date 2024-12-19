@@ -1,12 +1,11 @@
 'use client';
 import {
-    ProgressSlider,
-    SliderBtn,
-    SliderBtnGroup,
-    SliderContent,
-    SliderWrapper,
+  ProgressSlider,
+  SliderBtn,
+  SliderBtnGroup,
+  SliderContent,
+  SliderWrapper,
 } from '@/components/uilayouts/progress-slider';
-import { useMediaQuery } from '@/hooks/use-media-query';
 import Image from 'next/image';
 import Link from 'next/link';
 
