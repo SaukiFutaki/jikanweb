@@ -1,13 +1,13 @@
 "use client";
-import { IDataManga } from "@/types/detail/manga";
+import { IDataAnime } from "@/types/detail/anime";
 import { motion } from "framer-motion";
 import BrutalButton from "../brutal-btn";
 import BrutalCard from "../brutal-card";
 import HeroMangaPopuler from "../hmanga-populer";
-import PSliderTopManga from "../p-slider-top";
+import PSliderTopAnime from "../p-slider-l";
 
 interface Props {
-  data: IDataManga[];
+  data: IDataAnime[];
 }
 
 export default function HeroAnime({ data }: Props) {
@@ -53,7 +53,7 @@ export default function HeroAnime({ data }: Props) {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <PSliderTopManga data={data} />
+          <PSliderTopAnime data={data} />
         </motion.div>
       </div>
 

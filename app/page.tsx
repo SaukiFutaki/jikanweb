@@ -2,27 +2,32 @@
 // import CardList from "./_components/card-list";
 // import IndexDemo from "@/components/demo/ps";
 // import { Card } from "@/components/ui/card";
-import HeroAnime from "@/components/anime/hero";
 import BrutalButton from "@/components/brutal-btn";
 import BrutalCard from "@/components/brutal-card";
 import H from "@/components/demo/h";
 import HeroMangaPopuler from "@/components/hmanga-populer";
 import PSliderTopManga from "@/components/p-slider-top";
+import { getTopAnimeWithLimit } from "@/lib/actions/anime";
 import { getTopMangaWithLimit } from "@/lib/actions/manga";
-import { Orbitron } from "next/font/google";
+import { Orbitron, Roboto } from "next/font/google";
 
 const orbitron = Orbitron({
   subsets: ["latin"],
   weight: ["400"],
 });
 
+
+const roboto = Roboto({
+  subsets : ['latin'],
+  weight : "400"
+})
 export default async function Home() {
   const data = await getTopMangaWithLimit(3);
-
+  // const animeData = await getTopAnimeWithLimit(4);
 
   return (
     <div>
-      <div className={`bg-red-400  h-full p-10 border-black border-2`}>
+      <div className={`bg-red-400  h-full p-10 border-black border-x-2 border-b`}>
         <BrutalCard
           className={`${orbitron.className} selection:bg-purple-400 mb-20`}
         >
@@ -57,7 +62,7 @@ export default async function Home() {
         <div>
           <BrutalCard>
             <div className="flex flex-row justify-between mb-2 items-center">
-              <h1 className="text-5xl">Manga Terpopuler</h1>
+              <h1 className={`text-5xl ${roboto.className}`}>Manga Terpopuler</h1>
               <BrutalButton className="text-black flex justify-center items-center">
                 Go to All Manga →
               </BrutalButton>
@@ -72,7 +77,7 @@ export default async function Home() {
 
 
       <div className="h-full bg-blue-400 p-10 border-black border-2">
-      <HeroAnime data={data.data} />
+        {/* <HeroAnime data={animeData.data} /> */}
       </div>
     </div>
   );

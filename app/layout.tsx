@@ -1,8 +1,7 @@
+import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import type { Metadata } from "next";
-import { Pixelify_Sans } from "next/font/google";
 import localFont from "next/font/local";
-import Link from "next/link";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
@@ -17,10 +16,7 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-const pixelify = Pixelify_Sans({
-  subsets: ["latin"],
-  weight: ["400"],
-});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -45,22 +41,15 @@ export default function RootLayout({
         >
           <NextTopLoader />
 
-          <header className="border-b-4 border-black flex justify-between  items-center bg-white">
-            <Link
-              href="/"
-              className=" selection:bg-red-500 border-r-4 border-black p-6"
-            >
-              <p className={`${pixelify.className} md:text-5xl text-black`}>
-                Anime
-              </p>
-            </Link>
-          </header>
-
+          <Navbar />
           <div className="">{children}</div>
           <footer className="border-t-4 border-black bg-white p-6">
             <p className="text-black ">
               © {new Date().getFullYear()}
-              <a className="pl-2 underline hover:text-blue-500" href="https://www.linkedin.com/in/m-sauki-futaki-wahid-b67a7924a/">
+              <a
+                className="pl-2 underline hover:text-blue-500"
+                href="https://www.linkedin.com/in/m-sauki-futaki-wahid-b67a7924a/"
+              >
                 Sauki Futaki
               </a>
             </p>
