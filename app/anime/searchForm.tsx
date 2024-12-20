@@ -14,7 +14,7 @@ export default function SearchForm({ initialQuery = '' }) {
       <Input
         type="text"
         name="query"
-        disabled={isPending}
+        
         placeholder="Enter anime title..."
         defaultValue={initialQuery}
         className="border-2 border-black text-lg"
@@ -29,6 +29,11 @@ export default function SearchForm({ initialQuery = '' }) {
           }) 
         }}
       />
+      {isPending &&(
+        <h1>
+            sabar
+        </h1>
+      )}
     </div>
   )
 }
