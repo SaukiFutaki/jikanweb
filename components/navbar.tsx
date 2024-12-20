@@ -1,12 +1,11 @@
 "use client";
 
+import { shareTechmono } from "@/app/fonts";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Pixelify_Sans, Roboto } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import ButtonLogin from "./button-login";
-import { shareTechmono } from "@/app/fonts";
 
 const pixelify = Pixelify_Sans({
   subsets: ["latin"],

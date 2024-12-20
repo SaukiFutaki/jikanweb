@@ -30,7 +30,7 @@ const BrutalButton = ({
   const [isHovered, setIsHovered] = useState(false); // State untuk hover
   const [isPressed, setIsPressed] = useState(false); // State untuk tombol ditekan
   const [randomColor, setRandomColor] = useState(color);
-
+  console.log(type)
   useEffect(() => {
     setRandomColor(color ?? colors[Math.floor(Math.random() * colors.length)]);
   }, [color]);
