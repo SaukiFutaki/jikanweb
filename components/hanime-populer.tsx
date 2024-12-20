@@ -1,3 +1,4 @@
+"use client"
 import { IDataAnime } from "@/types/detail/anime";
 import Image from "next/image";
 import BrutalButton from "./brutal-btn";

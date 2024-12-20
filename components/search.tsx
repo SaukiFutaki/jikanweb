@@ -1,55 +1,54 @@
 "use client";
 
+import { shareTechmono } from "@/app/fonts";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
-import { useSearchParams } from "next/navigation";
-import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import BrutalCard from "./brutal-card";
+import { Button } from "./ui/button";
 
-interface SearchComponentProps {
-  onSearch: (query: string) => Promise<void>;
-}
+export function SearchComponent({initialQuery = ""}) {
+  const router = useRouter()
+  const [isPending, startTransition] = useTransition()
 
-export function SearchComponent({ onSearch }: SearchComponentProps) {
-  const searchParams = useSearchParams();
-  const [isPending, startTransition] = useTransition();
-  const [searchTerm, setSearchTerm] = useState(searchParams.get('q') ?? '');
-
-  const handleSearch = () => {
-    startTransition(async () => {
-      await onSearch(searchTerm);
-    });
-  };
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const query = formData.get('query')
+    startTransition(() => {
+      router.push(`/anime?q=${query}`)
+    })
+  }
 
   return (
-    <div className="mb-12 space-y-8">
-      <div className="bg-white border-4 border-black p-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-        <h2 className="text-2xl font-bold mb-4 font-mono">Search Anime</h2>
+    <div className="mb-12">
+      <BrutalCard>
+      <form onSubmit={handleSubmit}>
+        <h2 className={`${shareTechmono.className} text-2xl font-bold mb-4`}>
+          Search Anime
+        </h2>
         <div className="flex gap-4">
           <div className="relative flex-grow">
             <Input
               type="text"
-              placeholder="Enter anime title..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  handleSearch();
-                }
-              }}
-              className="pl-10 border-2 border-black text-lg"
+              placeholder={"Search Anime"}
+              name="query"
+              defaultValue={initialQuery}
+              className=" border-b-4 border-r-4 border-black text-lg"
             />
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+
           </div>
-          <Button
-            onClick={handleSearch}
-            disabled={isPending}
-            className="bg-black text-white hover:bg-gray-800 text-lg px-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]"
-          >
-            {isPending ? 'Searching...' : 'Search'}
-          </Button>
+          <Button 
+          type="submit"
+          disabled={isPending}
+          className="bg-black text-white hover:bg-gray-800 text-lg px-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]"
+        >
+          {isPending ? 'Searching...' : 'Search'}
+        </Button>
+
         </div>
-      </div>
+      </form>
+      </BrutalCard>
     </div>
   );
 }

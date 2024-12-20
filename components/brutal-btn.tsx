@@ -9,6 +9,8 @@ interface Props {
   children?: React.ReactNode;
   link?: string;
   className?: string;
+  onClick?: () => void;
+  type ?: "submit" | "button" | "reset";
 }
 
 const colors = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEEAD"];
@@ -22,6 +24,8 @@ const BrutalButton = ({
   children,
   className,
   disabled,
+  onClick,
+  type
 }: Props) => {
   const [isHovered, setIsHovered] = useState(false); // State untuk hover
   const [isPressed, setIsPressed] = useState(false); // State untuk tombol ditekan
@@ -34,7 +38,7 @@ const BrutalButton = ({
   return (
     <>
       {disabled ? (
-        <div>
+        <div onClick={onClick}>
           <div
             className={`${className} brutal-btn ${sanchez.className} ${
               isHovered || isPressed ? "bg-random" : "bg-white"
