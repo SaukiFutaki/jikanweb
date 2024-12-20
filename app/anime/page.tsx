@@ -11,10 +11,10 @@ export const dynamic = "force-dynamic";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { q?: string; page?: string };
+  searchParams: Promise<{ q?: string; page?: string }>
 }) {
-  const query = searchParams.q || "";
-  const page = Number(searchParams.page) || 1;
+  const query =  (await searchParams).q || "";
+  const page = Number((await searchParams).page) || 1;
   const animeData = query
     ? await getAnime(query, page)
     : { data: [], pagination: { has_next_page: false, last_visible_page: 1 } };
