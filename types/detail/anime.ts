@@ -24,9 +24,10 @@ export interface IDataAnime {
   title_japanese: string;
   trailer: {
     embed_url: string;
+    youtube_id: string;
   };
   pagination: {
-    last_visible_number: number;
+    last_visible_page: number;
     has_next_page: boolean;
     items: {
       count: number;

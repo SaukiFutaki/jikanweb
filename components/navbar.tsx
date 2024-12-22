@@ -63,7 +63,7 @@ export default function Navbar() {
       transition={{ duration: 0.35, ease: "easeInOut" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="h-20 bg-white border-black border-b-4 sticky top-0 z-50"
+      className="h-20 bg-white border-black border-b-4 sticky top-0 z-50 hidden lg:block "
     >
       <div className="border-x-4 border-black mx-[8.25rem] h-full">
         <div className="flex h-full">

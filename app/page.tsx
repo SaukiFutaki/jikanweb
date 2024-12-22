@@ -13,7 +13,7 @@ import { getTopMangaWithLimit } from "@/lib/actions/manga";
 import { orbitron, roboto } from "./fonts";
 
 export default async function Home() {
-  const data = await getTopMangaWithLimit(3);
+  const data = await getTopMangaWithLimit(4);
   const animeData = await getTopAnimeWithLimit(6);
 
   return (
@@ -71,9 +71,7 @@ export default async function Home() {
       </div>
 
       <div className="h-full bg-blue-400  border-black border-2">
-        <div className="flex items-center justify-center ">
-          <h1 className="text-black bg-white border-2 border-black p-2">Anime</h1>
-        </div>
+     
         <div className="p-10">
           <HeroAnime data={animeData.data} />
         </div>

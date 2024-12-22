@@ -1,45 +1,60 @@
 import { Suspense } from "react";
 
-import AnimeList from "./animeList";
-import SearchForm from "./searchForm";
+import BrutalCard from "@/components/brutal-card";
 import HeroAnimePopuler from "@/components/hanime-populer";
-import { IDataAnime } from "@/types/detail/anime";
-import { getAnime, getTopAnimeWithLimit } from "@/lib/actions/anime";
+import SearchComponent from "@/components/search";
+import SelectGenre from "@/components/select-genre";
+import {
+  getAllGenresAnime,
+  getAnime,
+  getTopAnimeWithLimit,
+} from "@/lib/actions/anime";
+import PaginationAnime from "./pagination-anime";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string; page?: string }>
+  searchParams: Promise<{ q?: string; page?: string }>;
 }) {
-  const query =  (await searchParams).q || "";
+
+  const query = (await searchParams).q || "";
   const page = Number((await searchParams).page) || 1;
+  const limit = 12;
+  // const topAnimeData = await getTopAnimeWithLimit(limit, page);
+  const dataGenres = await getAllGenresAnime();
   const animeData = query
-    ? await getAnime(query, page)
-    : { data: [], pagination: { has_next_page: false, last_visible_page: 1 } };
-  const topAnimeData = await getTopAnimeWithLimit(6);
+  ? await getAnime(query, page)
+  : await getTopAnimeWithLimit(limit, page);
+
 
   return (
-    <div className="min-h-screen bg-[#F4EFEA] p-8">
-      <div className="mb-8">
-        <SearchForm initialQuery={query} />
+    <div className=" bg-[#F4EFEA] p-8 gap-y-4 flex flex-col">
+      <div className="flex items-center  mb-6 gap-x-4">
+        <BrutalCard>
+          <SearchComponent />
+        </BrutalCard>
+
+        <BrutalCard>
+          <SelectGenre allGenres={dataGenres.data} />
+        </BrutalCard>
       </div>
 
-      {query ? (
+      <div>
         <Suspense
-          fallback={
-            <div className="text-center text-2xl font-bold">Loading...</div>
-          }
+          fallback={<div className="text-center text-2xl font-bold">anjay</div>}
         >
-          <AnimeList initialData={animeData} />
+          <HeroAnimePopuler data={animeData.data} />
         </Suspense>
-      ) : (
-        <div className="mb-12">
-          <h2 className="text-4xl font-bold mb-6 font-mono">Top Anime</h2>
-          <HeroAnimePopuler data={topAnimeData.data as IDataAnime[]} />
-        </div>
-      )}
+      </div>
+
+
+
+      <div>
+        <PaginationAnime data={animeData} />
+      </div>
+
     </div>
   );
 }

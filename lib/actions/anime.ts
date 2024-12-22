@@ -7,11 +7,12 @@ export const getAllTopAnime = async () => {
   return data;
 };
 
-export const getTopAnimeWithLimit = async (limit: number) => {
-    const response = await fetch(`${process.env.BASE_URL}/top/anime?limit=${limit}`);
-    const data = await response.json();
-    
-    return data;
+export const getTopAnimeWithLimit = async (limit: number, page: number = 1) => {
+  const response = await fetch(
+    `${process.env.BASE_URL}/top/anime?limit=${limit}&page=${page}`
+  );
+  const data = await response.json();
+  return data;
 }
 
 export const getAnimeById = async (id: string) => {
@@ -77,9 +78,9 @@ export const getRandomAnimeRecommendation = async () => {
   }
 
 
-  export async function getAnime(query: string, page: number) {
+  export async function getAnime(query: string, page: number = 1) {
     try {
-      return await fetchWithRetry(`https://api.jikan.moe/v4/anime?q=${query}&page=${page}&limit=12`)
+      return await fetchWithRetry(`https://api.jikan.moe/v4/anime?q=${query}&page=${page}`)
     } catch (error) {
       console.error('Failed to fetch anime:', error)
       throw new Error('Failed to fetch anime. Please try again later.')

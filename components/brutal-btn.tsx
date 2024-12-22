@@ -25,12 +25,12 @@ const BrutalButton = ({
   className,
   disabled,
   onClick,
-  type
+  type = "button",
 }: Props) => {
   const [isHovered, setIsHovered] = useState(false); // State untuk hover
   const [isPressed, setIsPressed] = useState(false); // State untuk tombol ditekan
   const [randomColor, setRandomColor] = useState(color);
-  console.log(type)
+ 
   useEffect(() => {
     setRandomColor(color ?? colors[Math.floor(Math.random() * colors.length)]);
   }, [color]);
@@ -38,7 +38,7 @@ const BrutalButton = ({
   return (
     <>
       {disabled ? (
-        <div onClick={onClick}>
+        <div onClick={onClick} typeof={type}>
           <div
             className={`${className} brutal-btn ${sanchez.className} ${
               isHovered || isPressed ? "bg-random" : "bg-white"

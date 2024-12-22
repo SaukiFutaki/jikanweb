@@ -1,54 +1,54 @@
 "use client";
 
-import { shareTechmono } from "@/app/fonts";
-import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
-import BrutalCard from "./brutal-card";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, FormEvent } from "react";
+import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 
-export function SearchComponent({initialQuery = ""}) {
-  const router = useRouter()
-  const [isPending, startTransition] = useTransition()
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const query = formData.get('query')
-    startTransition(() => {
-      router.push(`/anime?q=${query}`)
-    })
-  }
+export default function SearchComponent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
+
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+    
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    
+    if (searchQuery.trim()) {
+      current.set("q", searchQuery.trim());
+      current.delete("page"); // Reset to page 1 when searching
+    } else {
+      current.delete("q");
+      current.delete("page");
+    }
+    
+    // Preserve selected genres if any
+    const query = current.toString();
+    const newUrl = query ? `?${query}` : "/";
+    router.push(newUrl);
+  };
 
   return (
-    <div className="mb-12">
-      <BrutalCard>
-      <form onSubmit={handleSubmit}>
-        <h2 className={`${shareTechmono.className} text-2xl font-bold mb-4`}>
-          Search Anime
-        </h2>
-        <div className="flex gap-4">
-          <div className="relative flex-grow">
-            <Input
-              type="text"
-              placeholder={"Search Anime"}
-              name="query"
-              defaultValue={initialQuery}
-              className=" border-b-4 border-r-4 border-black text-lg"
-            />
-
-          </div>
-          <Button 
-          type="submit"
-          disabled={isPending}
-          className="bg-black text-white hover:bg-gray-800 text-lg px-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]"
-        >
-          {isPending ? 'Searching...' : 'Search'}
-        </Button>
-
+    <div>
+      <form onSubmit={handleSearch} className="flex gap-2">
+        <div className="relative flex-grow">
+          <Input
+            type="text"
+            placeholder=". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="border-2 border-black text-lg"
+          />
         </div>
+        <Button
+          type="submit"
+          className="bg-black text-white hover:bg-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]"
+        >
+          Search
+        </Button>
       </form>
-      </BrutalCard>
     </div>
   );
 }

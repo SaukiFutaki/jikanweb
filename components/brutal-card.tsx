@@ -22,6 +22,7 @@ const BrutalCard = ({ color, children, className }: Props) => {
   useEffect(() => {
     setRandomColor(color ?? colors[Math.floor(Math.random() * colors.length)]);
   }, [color]);
+  
   return (
     <div
       className={`rounded-[0.5rem] border-black border-[3px] drop-shadow-[7px_7px_0_rgb(0_0_0_/_1)] transition-all duration-500 ease-in-out hover:drop-shadow-[5px_5px_0_rgb(0_0_0_/_1)] p-4 ${className}`}

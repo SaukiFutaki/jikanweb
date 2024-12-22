@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
+import Footer from "@/components/footer";
+import PageTransitionEffect from "@/components/pagetransition";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,23 +32,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        
-          <NextTopLoader />
-
-          <Navbar />
-          <div className="">{children}</div>
-          <footer className="border-t-4 border-black bg-white p-4">
-            <p className="text-black ">
-              © {new Date().getFullYear()}
-              <a
-                className="pl-2 underline hover:text-blue-500"
-                href="https://www.linkedin.com/in/m-sauki-futaki-wahid-b67a7924a/"
-              >
-                Sauki Futaki
-              </a>
-            </p>
-          </footer>
-       
+        <NextTopLoader />
+        <Navbar />
+        {/* <div className="hidden sm:hidden md:hidden lg:block">{children}</div> */}
+        <PageTransitionEffect>{children}</PageTransitionEffect>
+        <Footer />
+        <div className="flex justify-center items-center h-screen lg:hidden  sm:block md:block">
+          <h1 className="text-4xl font-bold text-center  ">
+            This site is not supported on mobile devices
+          </h1>
+        </div>
       </body>
     </html>
   );
