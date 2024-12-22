@@ -30,7 +30,6 @@
     "nextjs-toploader": "^3.7.15",
     "player.style": "^0.1.1",
     "react": "19.0.0-rc-66855b96-20241106",
-    "react-awesome-loaders": "^0.1.37",
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
