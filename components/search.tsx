@@ -1,54 +1,55 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, FormEvent } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function SearchComponent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
 
-  const handleSearch = (e: FormEvent) => {
-    e.preventDefault();
-    
+  const handleSearch = useDebouncedCallback((value: string) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
     
-    if (searchQuery.trim()) {
-      current.set("q", searchQuery.trim());
-      current.delete("page"); // Reset to page 1 when searching
+    if (value.trim()) {
+      current.set("q", value.trim());
     } else {
       current.delete("q");
-      current.delete("page");
     }
     
-    // Preserve selected genres if any
+    // Always reset to page 1 when search changes
+    current.delete("page");
+    
+    // Preserve genres if any
     const query = current.toString();
-    const newUrl = query ? `?${query}` : "/";
+    const newUrl = query ? `/anime?${query}` : "/anime";
     router.push(newUrl);
+  }, 300); // 300ms delay
+
+  const handleInputChange = (value: string) => {
+    setSearchQuery(value);
+    handleSearch(value);
   };
+
+  // Sync input value with URL params
+  useEffect(() => {
+    const urlQuery = searchParams.get("q") || "";
+    if (urlQuery !== searchQuery) {
+      setSearchQuery(urlQuery);
+    }
+  }, [searchParams]);
 
   return (
     <div>
-      <form onSubmit={handleSearch} className="flex gap-2">
-        <div className="relative flex-grow">
-          <Input
-            type="text"
-            placeholder=". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="border-2 border-black text-lg"
-          />
-        </div>
-        <Button
-          type="submit"
-          className="bg-black text-white hover:bg-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,0.3)]"
-        >
-          Search
-        </Button>
-      </form>
+      <Input
+        type="text"
+        placeholder=". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+        value={searchQuery}
+        onChange={(e) => handleInputChange(e.target.value)}
+        className="border-2 border-black text-lg"
+      />
     </div>
   );
 }

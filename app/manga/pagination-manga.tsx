@@ -1,5 +1,5 @@
-"use client"
-import { useRouter, useSearchParams } from 'next/navigation';
+"use client";
+import { useRouter, useSearchParams } from "next/navigation";
 import BrutalCard from "@/components/brutal-card";
 import {
   Pagination,
@@ -10,48 +10,43 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { IDataAnime } from "@/types/detail/anime";
+import { IDataManga } from "@/types/detail/manga";
 
+export default function PaginationManga({ data }: { data: IDataManga }) {
 
-export default function PaginationAnime({ data }: { data: IDataAnime }) {
-  
   const router = useRouter();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get('page')) || 1;
-
+  const currentPage = Number(searchParams.get("page")) || 1;
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handlePageChange = (pageNumber: number) => {
     const params = new URLSearchParams(searchParams);
 
     if (pageNumber === 1) {
-        params.delete('page'); 
-      } else {
-        params.set('page', pageNumber.toString());
-      }
-      
-      const queryString = params.toString();
-      const newPath = queryString ? `?${queryString}` : '/anime';
+      params.delete("page");
+    } else {
+      params.set("page", pageNumber.toString());
+    }
 
-      router.push(newPath);
-        scrollToTop();
+    const queryString = params.toString();
+    const newPath = queryString ? `?${queryString}` : "/anime";
+
+    router.push(newPath);
+    scrollToTop();
   };
-
-    
 
   const renderPageNumbers = () => {
     const lastPage = data.pagination.last_visible_page;
     const pages = [];
 
-    
     // Always show first page
     pages.push(
-      <PaginationItem key={1} className='cursor-pointer'>
-        <PaginationLink 
-          href="#" 
+      <PaginationItem key={1} className="cursor-pointer">
+        <PaginationLink
+          href="#"
           onClick={(e) => {
             e.preventDefault();
             handlePageChange(1);
@@ -66,19 +61,22 @@ export default function PaginationAnime({ data }: { data: IDataAnime }) {
     // Add ellipsis after first page if current page is far from start
     if (currentPage > 3) {
       pages.push(
-        <PaginationItem key="ellipsis1" className='cursor-pointer'>
+        <PaginationItem key="ellipsis1" className="cursor-pointer">
           <PaginationEllipsis />
         </PaginationItem>
       );
     }
 
     // Add pages around current page
-    for (let i = Math.max(2, currentPage - 1); i <= Math.min(lastPage - 1, currentPage + 1); i++) {
+    for (
+      let i = Math.max(2, currentPage - 1);
+      i <= Math.min(lastPage - 1, currentPage + 1);
+      i++
+    ) {
       if (i === 1 || i === lastPage) continue; // Skip if it's first or last page
       pages.push(
-        <PaginationItem key={i} className='cursor-pointer'>
-          <PaginationLink 
-           
+        <PaginationItem key={i} className="cursor-pointer">
+          <PaginationLink
             onClick={(e) => {
               e.preventDefault();
               handlePageChange(i);
@@ -103,9 +101,8 @@ export default function PaginationAnime({ data }: { data: IDataAnime }) {
     // Always show last page if it's different from first page
     if (lastPage > 1) {
       pages.push(
-        <PaginationItem key={lastPage} className='cursor-pointer'>
-          <PaginationLink 
-           
+        <PaginationItem key={lastPage} className="cursor-pointer">
+          <PaginationLink
             onClick={(e) => {
               e.preventDefault();
               handlePageChange(lastPage);
@@ -126,37 +123,40 @@ export default function PaginationAnime({ data }: { data: IDataAnime }) {
       <Pagination>
         <PaginationContent>
           <PaginationItem>
-            <PaginationPrevious 
+            <PaginationPrevious
               onClick={(e) => {
                 e.preventDefault();
                 if (currentPage > 1) {
                   handlePageChange(currentPage - 1);
                 }
               }}
-              className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+              className={
+                currentPage === 1 ? "pointer-events-none opacity-50" : ""
+              }
             />
           </PaginationItem>
-          
+
           {data.pagination.has_next_page || currentPage > 1 ? (
             renderPageNumbers()
           ) : (
             <PaginationItem>
-              <PaginationLink  isActive>
-                1
-              </PaginationLink>
+              <PaginationLink isActive>1</PaginationLink>
             </PaginationItem>
           )}
 
           <PaginationItem>
-            <PaginationNext 
-             
+            <PaginationNext
               onClick={(e) => {
                 e.preventDefault();
                 if (data.pagination.has_next_page) {
                   handlePageChange(currentPage + 1);
                 }
               }}
-              className={!data.pagination.has_next_page ? 'pointer-events-none opacity-50' : ''}
+              className={
+                !data.pagination.has_next_page
+                  ? "pointer-events-none opacity-50"
+                  : ""
+              }
             />
           </PaginationItem>
         </PaginationContent>

@@ -44,14 +44,7 @@ export const getRandomAnimeRecommendation = async () => {
   };
 
 
-  export const searchAnime = async (query: string) => {
-    if (!query) return [];
-    
-    const response = await fetch(`${process.env.BASE_URL}/anime?q=${query}`);
-    const data = await response.json();
-    console.log(data)
-    return data;
-  }
+
   
   
   export const getAllGenresAnime = async () => {
@@ -78,13 +71,24 @@ export const getRandomAnimeRecommendation = async () => {
   }
 
 
-  export async function getAnime(query: string, page: number = 1) {
+  export async function getAnime(query: string, page: number = 1, genres?: string) {
     try {
-      return await fetchWithRetry(`https://api.jikan.moe/v4/anime?q=${query}&page=${page}`)
+      let url = `${process.env.BASE_URL}/anime?page=${page}`;
+      
+      // Add search query if provided
+      if (query) {
+        url += `&q=${query}`;
+      }
+      
+      // Add genres if provided - using genres parameter for IDs
+      if (genres) {
+        url += `&genres=${genres}`;
+      }
+  
+      return await fetchWithRetry(url);
     } catch (error) {
-      console.error('Failed to fetch anime:', error)
-      throw new Error('Failed to fetch anime. Please try again later.')
+      console.error('Failed to fetch anime:', error);
+      throw new Error('Failed to fetch anime. Please try again later.');
     }
   }
-  
   

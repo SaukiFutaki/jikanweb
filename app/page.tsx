@@ -58,7 +58,7 @@ export default async function Home() {
               <h1 className={`text-5xl ${roboto.className}`}>
                 Manga Terpopuler
               </h1>
-              <BrutalButton className="text-black flex justify-center items-center">
+              <BrutalButton link="manga" className="text-black flex justify-center items-center">
                 Go to All Manga →
               </BrutalButton>
             </div>

@@ -16,15 +16,17 @@ export const dynamic = "force-dynamic";
 export default async function Page({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string; page?: string }>;
+  searchParams: Promise<{ q?: string; page?: string ;genres ?: string}>;
 }) {
-  const query = (await searchParams).q || "";
-  const page = Number((await searchParams).page) || 1;
+  const params = await searchParams;
+  const query = params.q || "";
+  const page = Number(params.page) || 1;
+  const genres = params.genres || "";
   const limit = 12;
   // const topAnimeData = await getTopAnimeWithLimit(limit, page);
   const dataGenres = await getAllGenresAnime();
   const animeData = query
-    ? await getAnime(query, page)
+    ? await getAnime(query, page, genres)
     : await getTopAnimeWithLimit(limit, page);
 
   return (
@@ -35,7 +37,7 @@ export default async function Page({
         </BrutalCard>
 
         <BrutalCard>
-          <SelectGenre allGenres={dataGenres.data} />
+          <SelectGenre allGenres={dataGenres.data} isEnabled={!!query} />
         </BrutalCard>
       </div>
 

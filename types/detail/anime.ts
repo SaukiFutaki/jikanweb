@@ -58,7 +58,7 @@ export interface IDataRecommendationManga {
 }
 
 export interface IAnimeGenres {
-  mal_id: number;
+  mal_id: number | string;
   name: string;
   count: number;
 }

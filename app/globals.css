@@ -6,7 +6,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -258,3 +257,32 @@ html {
   background-color: aliceblue;
 } */
 
+.colorful {
+  width: 28px;
+  height: 28px;
+  background: #0707e9;
+  animation: colorful-hrvq02md 1.5s infinite;
+}
+
+@keyframes colorful-hrvq02md {
+  0%,
+  100% {
+    transform: translate(-33.6px, -33.6px);
+    box-shadow: 0 0 #ff6761, 0 0 #ffd82e;
+  }
+
+  40% {
+    transform: translate(33.6px, 33.6px);
+    box-shadow: -11.2px -11.2px #ff6761, -22.4px -22.4px #ffd82e;
+  }
+
+  50% {
+    transform: translate(33.6px, 33.6px);
+    box-shadow: 0 0 #ff6761, 0 0 #ffd82e;
+  }
+
+  90% {
+    transform: translate(-33.6px, -33.6px);
+    box-shadow: 11.2px 11.2px #ff6761, 22.4px 22.4px #ffd82e;
+  }
+}
