@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AnimeCard } from "@/components/AnimeCard";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -126,14 +125,9 @@ export default function AnimeList({ initialData }: { initialData: AnimeData }) {
         {filteredAnime?.length > 0 ? ( 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredAnime.map((anime) => (
-              <AnimeCard
-                key={anime.mal_id}
-                id={anime.mal_id.toString()}
-                title={anime.title}
-                description={anime.synopsis}
-                coverImage={anime.images.jpg.image_url}
-                genres={anime.genres.map((g) => g.name)}
-              />
+              <div key={anime.mal_id}>
+
+              </div>
             ))}
           </div>
         ) : (

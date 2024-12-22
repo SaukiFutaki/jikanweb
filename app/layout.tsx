@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import Footer from "@/components/footer";
-import PageTransitionEffect from "@/components/pagetransition";
+// import PageTransitionEffect from "@/components/pagetransition";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,8 +34,8 @@ export default function RootLayout({
       >
         <NextTopLoader />
         <Navbar />
-        {/* <div className="hidden sm:hidden md:hidden lg:block">{children}</div> */}
-        <PageTransitionEffect>{children}</PageTransitionEffect>
+        <div className="hidden sm:hidden md:hidden lg:block">{children}</div>
+        {/* <PageTransitionEffect>{children}</PageTransitionEffect> */}
         <Footer />
         <div className="flex justify-center items-center h-screen lg:hidden  sm:block md:block">
           <h1 className="text-4xl font-bold text-center  ">

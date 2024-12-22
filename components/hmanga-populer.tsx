@@ -32,19 +32,32 @@ export default function HeroMangaPopuler({ data }: { data: IDataManga[] }) {
               </div>
             </div>
           </div>
-          <h1 className="text-lg font-bold line-clamp-1">
-            <h1>{item.title}</h1>
-          </h1>
-          <p className="text-sm text-gray-900 line-clamp-3 selection:bg-violet-400">
-            {item.synopsis}
-          </p>
+          <div className="mt-4">
+            <div className="flex flex-wrap gap-2 mb-2">
+              {item.genres?.map((genre) => (
+                <BrutalButton
+                  key={genre.name}
+                  className="rounded-full text-black"
+                  disabled
+                >
+                  {genre.name}
+                </BrutalButton>
+              ))}
+            </div>
 
-          <BrutalButton
-            link={`/detail/manga/${item.mal_id}`}
-            className="mt-2 text-black"
-          >
-            Lihat Detail →
-          </BrutalButton>
+            <h1 className="text-lg font-bold line-clamp-1">{item.title}</h1>
+
+            <p className="text-sm text-gray-900 line-clamp-3 selection:bg-violet-400">
+              {item.synopsis}
+            </p>
+
+            <BrutalButton
+              link={`/detail/anime/${item.mal_id}`}
+              className="mt-4 text-black"
+            >
+              Lihat Detail →
+            </BrutalButton>
+          </div>
         </BrutalCard>
       ))}
     </div>

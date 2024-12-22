@@ -18,16 +18,14 @@ export default async function Page({
 }: {
   searchParams: Promise<{ q?: string; page?: string }>;
 }) {
-
   const query = (await searchParams).q || "";
   const page = Number((await searchParams).page) || 1;
   const limit = 12;
   // const topAnimeData = await getTopAnimeWithLimit(limit, page);
   const dataGenres = await getAllGenresAnime();
   const animeData = query
-  ? await getAnime(query, page)
-  : await getTopAnimeWithLimit(limit, page);
-
+    ? await getAnime(query, page)
+    : await getTopAnimeWithLimit(limit, page);
 
   return (
     <div className=" bg-[#F4EFEA] p-8 gap-y-4 flex flex-col">
@@ -49,12 +47,9 @@ export default async function Page({
         </Suspense>
       </div>
 
-
-
       <div>
         <PaginationAnime data={animeData} />
       </div>
-
     </div>
   );
 }
