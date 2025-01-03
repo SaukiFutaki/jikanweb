@@ -6,6 +6,7 @@ import { Pixelify_Sans, Roboto } from "next/font/google";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const pixelify = Pixelify_Sans({
   subsets: ["latin"],
@@ -42,7 +43,13 @@ export default function Navbar() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [isAnimeDetail, setIsAnimeDetail] = useState<boolean>(false);
 
+  useEffect(() => {
+    // Check if the path matches anime/:id
+    const isDetailPath = /^\/anime\/\d+$/.test(pathname);
+    setIsAnimeDetail(isDetailPath);
+  }, [pathname]);
   useMotionValueEvent(scrollY, "change", (latest) => {
     const prev = scrollY.getPrevious() ?? 0;
     if (latest > prev && latest > 150) {
@@ -51,7 +58,9 @@ export default function Navbar() {
       setHidden(false);
     }
   });
-
+  if (isAnimeDetail) {
+    return null; // Hide the Navbar
+  }
   return (
     <motion.header
       variants={{
@@ -63,7 +72,7 @@ export default function Navbar() {
       transition={{ duration: 0.35, ease: "easeInOut" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="h-20 bg-white border-black border-b-4 sticky top-0 z-50 hidden lg:block "
+      className={`h-20 bg-white border-black border-b-4 sticky top-0 z-50 hidden lg:block  ${pathname === "/anime* "} `}
     >
       <div className="border-x-4 border-black mx-[8.25rem] h-full">
         <div className="flex h-full">

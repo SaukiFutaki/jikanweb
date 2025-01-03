@@ -4,8 +4,8 @@ import BrutalButton from "./brutal-btn";
 import BrutalCard from "./brutal-card";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "./ui/tabs";
 import { Badge } from "./ui/badge";
-import YoutubeVideo from 'youtube-video-element/react';
-import MediaThemeSutro from 'player.style/sutro/react';
+import YoutubeVideo from "youtube-video-element/react";
+import MediaThemeSutro from "player.style/sutro/react";
 
 export default function HeroAnimePopuler({ data }: { data: IDataAnime[] }) {
   return (
@@ -52,7 +52,7 @@ export default function HeroAnimePopuler({ data }: { data: IDataAnime[] }) {
                     </MediaThemeSutro>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-center my-28" >
+                  <div className="flex items-center justify-center my-28">
                     <Badge variant={"destructive"}>
                       Sorry no trailer available
                     </Badge>
@@ -82,10 +82,13 @@ export default function HeroAnimePopuler({ data }: { data: IDataAnime[] }) {
             </p>
 
             <BrutalButton
-              link={`/detail/anime/${item.mal_id}`}
-              className="mt-4 text-black"
+              link={`/anime/${item.mal_id}`}
+              className="mt-4 text-black group "
             >
-              Lihat Detail →
+              Lihat Detail
+              <span className=" pl-1 inline-block transition-transform duration-300 ease-in-out group-hover:translate-x-1">
+                →
+              </span>
             </BrutalButton>
           </div>
         </BrutalCard>

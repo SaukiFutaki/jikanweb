@@ -5,6 +5,7 @@ import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import Footer from "@/components/footer";
 // import PageTransitionEffect from "@/components/pagetransition";
+import { Toaster } from "@/components/ui/toaster"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,6 +35,7 @@ export default function RootLayout({
       >
         <NextTopLoader />
         <Navbar />
+        
         <div className="hidden sm:hidden md:hidden lg:block">{children}</div>
         {/* <PageTransitionEffect>{children}</PageTransitionEffect> */}
         <Footer />
@@ -42,6 +44,7 @@ export default function RootLayout({
             This site is not supported on mobile devices
           </h1>
         </div>
+        <Toaster />
       </body>
     </html>
   );
