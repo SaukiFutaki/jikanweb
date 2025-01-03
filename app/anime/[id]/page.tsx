@@ -43,7 +43,7 @@ async function fetchAnimeData(id: string) {
 }
 
 export default async function Page({ params }: PageProps) {
-  if (!(await params)?.id) return notFound();
+  // if (!(await params)?.id) return notFound();
 
   const { anime: data, recommendations } = await fetchAnimeData((await params).id);
 
