@@ -19,7 +19,7 @@ import BrutalCard from "@/components/brutal-card";
 import Share from "./_components/share";
 
 interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 interface AnimeResponse {
   data: IDetailAnime;
@@ -43,9 +43,9 @@ async function fetchAnimeData(id: string) {
 }
 
 export default async function Page({ params }: PageProps) {
-  if (!params?.id) return notFound();
+  if (!(await params)?.id) return notFound();
 
-  const { anime: data, recommendations } = await fetchAnimeData(params.id);
+  const { anime: data, recommendations } = await fetchAnimeData((await params).id);
 
   return (
     <div className="bg-[#F4EFEA] border-2 border-black">
