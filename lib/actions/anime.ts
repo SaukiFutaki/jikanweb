@@ -19,7 +19,12 @@ export const getAnimeById = async (id: string) => {
   const response = await fetch(`${process.env.ANIME_URL}/${id}/full`);
   const data = await response.json();
 
-  return data;
+  // return data;
+  if(!data) {
+    return null;
+  } else {
+    return data;
+  }
 };
 
 export const getAnimeRecommendation = async (id: string) => {

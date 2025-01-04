@@ -176,12 +176,12 @@ export interface IDetailAnime {
   }>;
   relations: Array<{
     relation: string;
-    entry: Array<{
+    entry: {
       mal_id: number;
       type: string;
       name: string;
       url: string;
-    }>;
+    }[];
   }>;
   theme: {
     openings: string[];
