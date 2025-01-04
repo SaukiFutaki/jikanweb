@@ -13,7 +13,7 @@ import AnimeInfo from "./_components/anime-info";
 import { AnimeRecommendations } from "./_components/anime-recomendation";
 import { BackButton } from "./_components/back-button";
 import ExternalLink from "./_components/external-link";
-import { RelatedAnime } from "./_components/related-anime";
+// import { RelatedAnime } from "./_components/related-anime";
 import BrutalButton from "@/components/brutal-btn";
 import BrutalCard from "@/components/brutal-card";
 import Share from "./_components/share";
@@ -157,7 +157,7 @@ export default async function Page({ params }: PageProps) {
           </AnimatedWrapper>
         </div>
         <Separator className="my-8" />
-        <RelatedAnime data={data} />
+        {/* <RelatedAnime data={data} /> */}
         <Separator className="my-8" />
         <AnimeRecommendations recommendations={recommendations} />
         <Separator className="my-8" />
