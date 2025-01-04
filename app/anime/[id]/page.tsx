@@ -38,7 +38,7 @@ async function fetchAnimeData(id: string) {
     };
   } catch (error) {
     console.error("Error fetching anime data:", error);
-    return notFound();
+    notFound();
   }
 }
 
