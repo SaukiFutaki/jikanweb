@@ -19,17 +19,17 @@ import BrutalCard from "@/components/brutal-card";
 import Share from "./_components/share";
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ id: number }>;
 }
 interface AnimeResponse {
   data: IDetailAnime;
 }
 
-async function fetchAnimeData(id: string) {
+async function fetchAnimeData(id: number) {
   try {
     const [animeData, recommendations] = await Promise.all([
-      getAnimeById(id) as Promise<AnimeResponse>,
-      getAnimeRecommendation(id),
+      getAnimeById(id.toString()) as Promise<AnimeResponse>,
+      getAnimeRecommendation(id.toString()), ,
     ]);
 
     return {
@@ -37,7 +37,7 @@ async function fetchAnimeData(id: string) {
       recommendations: recommendations.data,
     };
   } catch (error) {
-    console.error("Error fetching anime data:", error);
+    console.error("Error cuy:", error);
     notFound();
   }
 }
