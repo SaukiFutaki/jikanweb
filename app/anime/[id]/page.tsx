@@ -1,4 +1,4 @@
-import { getAnimeById, getAnimeRecommendation } from "@/lib/actions/anime";
+import { getAnimeById } from "@/lib/actions/anime";
 
 import { Rating } from "@/components/rating";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +10,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import AnimatedWrapper from "./_components/animate-wrap";
 import AnimeInfo from "./_components/anime-info";
-import { AnimeRecommendations } from "./_components/anime-recomendation";
+// import { AnimeRecommendations } from "./_components/anime-recomendation";
 import { BackButton } from "./_components/back-button";
 import ExternalLink from "./_components/external-link";
 // import { RelatedAnime } from "./_components/related-anime";
@@ -27,14 +27,14 @@ interface AnimeResponse {
 
 async function fetchAnimeData(id: number) {
   try {
-    const [animeData, recommendations] = await Promise.all([
+    const [animeData] = await Promise.all([
       getAnimeById(id) as Promise<AnimeResponse>,
-      getAnimeRecommendation(id),
+      // getAnimeRecommendation(id),
     ]);
 
     return {
       anime: animeData.data,
-      recommendations: recommendations.data,
+      // recommendations: recommendations.data,
     };
   } catch (error) {
     console.error("Error cuy:", error);
@@ -45,7 +45,7 @@ async function fetchAnimeData(id: number) {
 export default async function Page({ params }: PageProps) {
    if (!(await params)?.id) return notFound();
 
-  const { anime: data, recommendations } = await fetchAnimeData((await params).id);
+  const { anime: data } = await fetchAnimeData((await params).id);
 
   return (
     <div className="bg-[#F4EFEA] border-2 border-black">
@@ -159,7 +159,7 @@ export default async function Page({ params }: PageProps) {
         <Separator className="my-8" />
         {/* <RelatedAnime data={data} /> */}
         <Separator className="my-8" />
-        <AnimeRecommendations recommendations={recommendations} />
+        {/* <AnimeRecommendations recommendations={recommendations} /> */}
         <Separator className="my-8" />
         <ExternalLink data={data} />
       </AnimatedWrapper>
