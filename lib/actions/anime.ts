@@ -15,7 +15,7 @@ export const getTopAnimeWithLimit = async (limit: number, page: number = 1) => {
   return data;
 }
 
-export const getAnimeById = async (id: string) => {
+export const getAnimeById = async (id: number) => {
   const response = await fetch(`${process.env.ANIME_URL}/${id}/full`);
   const data = await response.json();
 
@@ -27,7 +27,7 @@ export const getAnimeById = async (id: string) => {
   }
 };
 
-export const getAnimeRecommendation = async (id: string) => {
+export const getAnimeRecommendation = async (id: number) => {
   const response = await fetch(
     `${process.env.ANIME_URL}/${id}/recommendations`
   );

@@ -28,8 +28,8 @@ interface AnimeResponse {
 async function fetchAnimeData(id: number) {
   try {
     const [animeData, recommendations] = await Promise.all([
-      getAnimeById(id.toString()) as Promise<AnimeResponse>,
-      getAnimeRecommendation(id.toString()), ,
+      getAnimeById(id) as Promise<AnimeResponse>,
+      getAnimeRecommendation(id),
     ]);
 
     return {
@@ -43,7 +43,7 @@ async function fetchAnimeData(id: number) {
 }
 
 export default async function Page({ params }: PageProps) {
-  // if (!(await params)?.id) return notFound();
+   if (!(await params)?.id) return notFound();
 
   const { anime: data, recommendations } = await fetchAnimeData((await params).id);
 
